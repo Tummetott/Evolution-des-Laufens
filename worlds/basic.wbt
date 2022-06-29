@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.16290331122944582 0.07889837311050155 0.9834823627859314 2.2525498983798276
-  position 4.913720181364097 -2.2972690365274184 1.1408730585813869
+  orientation -0.24409041378810573 0.14171715215349895 0.9593415026372273 2.125221139604997
+  position 3.402974603250735 -0.7067520342613839 0.5112526359308137
 }
 TexturedBackground {
 }
@@ -16,9 +16,26 @@ DEF cube_runner Robot {
   translation 3 0 0.05
   rotation 0 1 0 0
   children [
+    DEF gps GPS {
+      children [
+        Solid {
+          translation 0 0 0.05
+          children [
+            Shape {
+              appearance PBRAppearance {
+              }
+              geometry Cylinder {
+                height 0.01
+                radius 0.01
+              }
+            }
+          ]
+        }
+      ]
+    }
     DEF right_hinge HingeJoint {
       jointParameters HingeJointParameters {
-        axis 0 1 0
+        axis 0.2 1 0
       }
       device [
         DEF right_motor RotationalMotor {
@@ -26,8 +43,8 @@ DEF cube_runner Robot {
         }
       ]
       endPoint Solid {
-        translation 0 0.1 0
-        rotation 0 1 0 0
+        translation 0.03 0.1 0
+        rotation 0.19611613513818404 0.9805806756909201 0 0
         children [
           DEF foot Shape {
             appearance PBRAppearance {
@@ -35,7 +52,7 @@ DEF cube_runner Robot {
               metalness 0
             }
             geometry Box {
-              size 0.3 0.1 0.02
+              size 0.2 0.1 0.02
             }
           }
         ]
@@ -47,7 +64,7 @@ DEF cube_runner Robot {
     }
     DEF left_hinge HingeJoint {
       jointParameters HingeJointParameters {
-        axis 0 1 0
+        axis 0.2 1 0
       }
       device [
         DEF left_motor RotationalMotor {
@@ -55,8 +72,8 @@ DEF cube_runner Robot {
         }
       ]
       endPoint Solid {
-        translation 0 -0.1 0
-        rotation 0 1 0 0
+        translation -0.02 -0.1 0
+        rotation 0.19611613513818404 0.9805806756909201 0 0
         children [
           DEF foot Shape {
             appearance PBRAppearance {
@@ -64,7 +81,7 @@ DEF cube_runner Robot {
               metalness 0
             }
             geometry Box {
-              size 0.3 0.1 0.02
+              size 0.2 0.1 0.02
             }
           }
         ]
@@ -88,4 +105,9 @@ DEF cube_runner Robot {
   physics Physics {
   }
   controller "cube_runner_controller"
+}
+DEF supervisor Robot {
+  name "supervisor"
+  controller "supervisor_controller"
+  supervisor TRUE
 }
