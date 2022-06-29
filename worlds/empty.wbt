@@ -18,6 +18,8 @@ Robot {
   translation 0 -0.01 0.11
   rotation 0 1 0 0
   children [
+    GPS {
+    }
     DEF body Shape {
       appearance PBRAppearance {
         metalness 0
@@ -26,12 +28,15 @@ Robot {
         size 0.1 0.1 0.1
       }
     }
-    HingeJoint {
+    DEF left_hinge HingeJoint {
       jointParameters HingeJointParameters {
         axis 0 -0.3 0.7
         anchor 0.02 -0.05 0
       }
       device [
+        DEF ps_left PositionSensor {
+          name "ps_left"
+        }
         RotationalMotor {
           name "left"
         }
@@ -55,12 +60,15 @@ Robot {
         }
       }
     }
-    HingeJoint {
+    DEF right_hinge HingeJoint {
       jointParameters HingeJointParameters {
         axis 0 0.3 0.7
         anchor 0.02 0.05 0
       }
       device [
+        DEF ps_right PositionSensor {
+          name "ps_right"
+        }
         RotationalMotor {
           name "right"
         }
