@@ -1,0 +1,93 @@
+#VRML_SIM R2022a utf8
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.1076277354169729 -0.03421232764102131 0.9936024291467878 3.7534737592720844
+  position 2.2701472236546745 1.0732401176210944 0.5940221229650564
+}
+TexturedBackground {
+  texture "stadium"
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  rotation 0 1 0 4.692820414042842e-06
+  floorSize 5 5
+}
+Robot {
+  translation 0 -0.01 0.11
+  rotation 0 1 0 0
+  children [
+    DEF body Shape {
+      appearance PBRAppearance {
+        metalness 0
+      }
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 -0.3 0.7
+        anchor 0.02 -0.05 0
+      }
+      device [
+        RotationalMotor {
+          name "left"
+        }
+      ]
+      endPoint Solid {
+        translation 0.02 -0.1 -0.03
+        rotation -1 0 0 1.0471999999999997
+        scale 0.5 0.5 0.5
+        children [
+          DEF l Shape {
+            appearance PBRAppearance {
+            }
+            geometry Capsule {
+              height 0.2
+              radius 0.02
+            }
+          }
+        ]
+        boundingObject USE l
+        physics Physics {
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0.3 0.7
+        anchor 0.02 0.05 0
+      }
+      device [
+        RotationalMotor {
+          name "right"
+        }
+      ]
+      endPoint Solid {
+        translation 0.02 0.1 -0.03
+        rotation 1 0 0 1.0471999999999997
+        scale 0.5 0.5 0.5
+        children [
+          DEF r Shape {
+            appearance PBRAppearance {
+            }
+            geometry Capsule {
+              height 0.2
+              radius 0.02
+            }
+          }
+        ]
+        name "solid(1)"
+        boundingObject USE r
+        physics Physics {
+        }
+      }
+    }
+  ]
+  boundingObject USE body
+  physics Physics {
+  }
+  controller "my_controller"
+}
